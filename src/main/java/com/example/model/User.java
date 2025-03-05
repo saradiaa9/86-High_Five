@@ -28,4 +28,31 @@ public List<Order> getOrders() {
 public void setOrders(List<Order> orders) {
     this.orders = orders;
 }
+public ArrayList<User> getUsers(){
+
+}
+
+public User getUserById(UUID userId){
+    
+}
+
+public User addUser(User user){
+
+}
+
+public List<Order> getOrdersByUserId(UUID userId){
+
+}
+
+public void addOrderToUser(UUID userId, Order order){
+
+}
+
+public void removeOrderFromUser(UUID userId, UUID orderId){
+
+}
+
+public void deleteUserById(UUID userId){
+    
+}
 }
