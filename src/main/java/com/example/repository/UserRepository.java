@@ -27,4 +27,31 @@ public class UserRepository extends MainRepository<User>{
         throw new UnsupportedOperationException("Unimplemented method 'getArrayType'");
     }
 
+    public ArrayList<User> getUsers(){
+        return findAll();
+    }
+    
+    public User getUserById(UUID userId){
+        
+    }
+    
+    public User addUser(User user){
+    
+    }
+    
+    public List<Order> getOrdersByUserId(UUID userId){
+    
+    }
+    
+    public void addOrderToUser(UUID userId, Order order){
+    
+    }
+    
+    public void removeOrderFromUser(UUID userId, UUID orderId){
+    
+    }
+    
+    public void deleteUserById(UUID userId){
+        
+    }
 }
