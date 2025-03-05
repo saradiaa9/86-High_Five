@@ -29,4 +29,19 @@ public void setOrders(List<Order> orders) {
     this.orders = orders;
 }
 
+public User(){
+
+}
+
+public User(UUID id, String name, List<Order> orders) {
+    this.id = id;
+    this.name = name;
+    this.orders = orders;
+}
+public User(String name, List<Order> orders) {
+    this.id = UUID.randomUUID();
+    this.name = name;
+    this.orders = orders;
+
+}
 }
