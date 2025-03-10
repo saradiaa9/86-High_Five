@@ -62,14 +62,12 @@ public class CartRepository extends MainRepository<Cart> {
 
     @Override
     protected String getDataPath() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDataPath'");
+        return System.getProperty("user.dir") + "/src/main/java/com/example/data/carts.json";
     }
 
     @Override
     protected Class<Cart[]> getArrayType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getArrayType'");
+        return Cart[].class;
     }
 }
 

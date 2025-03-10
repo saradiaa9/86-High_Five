@@ -50,6 +50,7 @@ public class OrderRepository extends MainRepository<Order> {
 
     @Override
     protected String getDataPath() {
-        return "data/orders.json";
+        return System.getProperty("user.dir") + "/src/main/java/com/example/data/orders.json";
+
     }
 }

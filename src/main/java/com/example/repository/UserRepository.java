@@ -1,4 +1,5 @@
 package com.example.repository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -12,48 +13,46 @@ import com.example.model.User;
 
 @Repository
 @SuppressWarnings("rawtypes")
-public class UserRepository extends MainRepository<User>{
+public class UserRepository extends MainRepository<User> {
 
     public UserRepository() {
-}
+    }
 
     @Override
     protected String getDataPath() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDataPath'");
+        return System.getProperty("user.dir") + "/src/main/java/com/example/data/users.json";
     }
 
     @Override
     protected Class<User[]> getArrayType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getArrayType'");
+        return User[].class;
     }
 
-    public ArrayList<User> getUsers(){
+    public ArrayList<User> getUsers() {
         return findAll();
     }
-    
-    public User getUserById(UUID userId){
+
+    public User getUserById(UUID userId) {
         ArrayList<User> users = getUsers();
-        for(User user : users){
-            if(user.getId().equals(userId)){
+        for (User user : users) {
+            if (user.getId().equals(userId)) {
                 return user;
             }
         }
         return null;
     }
-    
-    public User addUser(User user){
+
+    public User addUser(User user) {
         save(user);
         return user;
     }
-    
-    public List<Order> getOrdersByUserId(UUID userId){
+
+    public List<Order> getOrdersByUserId(UUID userId) {
         User user = getUserById(userId);
         return (user != null) ? user.getOrders() : new ArrayList<>();
     }
-    
-    public void addOrderToUser(UUID userId, Order order){
+
+    public void addOrderToUser(UUID userId, Order order) {
         ArrayList<User> users = getUsers();
         for (User user : users) {
             if (user.getId().equals(userId)) {
@@ -63,8 +62,8 @@ public class UserRepository extends MainRepository<User>{
             }
         }
     }
-    
-    public void removeOrderFromUser(UUID userId, UUID orderId){
+
+    public void removeOrderFromUser(UUID userId, UUID orderId) {
         ArrayList<User> users = getUsers();
         for (User user : users) {
             if (user.getId().equals(userId)) {
@@ -74,8 +73,8 @@ public class UserRepository extends MainRepository<User>{
             }
         }
     }
-    
-    public void deleteUserById(UUID userId){
+
+    public void deleteUserById(UUID userId) {
         ArrayList<User> users = getUsers();
         users.removeIf(user -> user.getId().equals(userId));
         overrideData(users);
