@@ -16,7 +16,7 @@ public class ProductRepository extends MainRepository<Product> {
 
     @Override
     protected String getDataPath() {
-        return System.getProperty("user.dir") + "/src/main/java/com/example/data/product.json";
+        return System.getProperty("user.dir") + "/src/main/java/com/example/data/products.json";
     }
 
     @Override
@@ -58,9 +58,11 @@ public class ProductRepository extends MainRepository<Product> {
 
     public void applyDiscount(double discount, ArrayList<UUID> productIds) {
         ArrayList<Product> products = getProducts();
+        double discountFactor = discount / 100.0; 
+
         for (Product product : products) {
             if (productIds.contains(product.getId())) {
-                product.setPrice(product.getPrice() * (1 - discount));
+                product.setPrice(product.getPrice() * (1 - discountFactor));
             }
         }
         overrideData(products);

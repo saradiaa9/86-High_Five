@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.model.Cart;
 import com.example.model.Order;
 import com.example.model.Product;
 import com.example.model.User;
@@ -75,8 +76,9 @@ public class UserController {
     public String addProductToCart(@RequestParam UUID userId, @RequestParam UUID productId) {
 
         Product product = productService.getProductById(productId);
+        Cart cart = cartService.getCartByUserId(userId);
 
-        cartService.addProductToCart(userId, product);
+        cartService.addProductToCart(cart.getId(), product);
         return "Product added to cart";
     }
 
@@ -90,6 +92,6 @@ public class UserController {
     @DeleteMapping("/delete/{userId}")
     public String deleteUserById(@PathVariable UUID userId) {
         userService.deleteUserById(userId);
-        return "User not found";
+        return "User deleted successfully";
     }
 }

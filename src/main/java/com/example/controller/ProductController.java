@@ -44,8 +44,8 @@ public class ProductController {
 
     @PutMapping("/update/{productId}")
     public Product updateProduct(@PathVariable UUID productId, @RequestBody Map<String, Object> body){
-        String newName = (String) body.get("name");
-        double newPrice = (double) body.get("price");
+        String newName = (String) body.get("newName");
+        double newPrice = (double) body.get("newPrice");
         return productService.updateProduct(productId, newName, newPrice);
     }
 

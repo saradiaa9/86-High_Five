@@ -13,6 +13,7 @@ public class Cart {
     private List<Product> products;
 
     public Cart() {
+        products = new ArrayList<>();
     }
 
     public Cart(UUID id, UUID userId, List<Product> products) {

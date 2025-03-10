@@ -36,7 +36,7 @@ public class User {
     }
 
     public User() {
-
+        orders = new ArrayList<>();
     }
 
     public User(UUID id, String name, List<Order> orders) {
