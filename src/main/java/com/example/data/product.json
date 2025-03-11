@@ -1,1 +1,27 @@
-[{"id":"6b204bf6-7c40-4bae-a01d-2ef288b513a5","name":"Test Product","price":10.0},{"id":"ba590845-adce-42aa-8ad4-8ba8a57fbc44","name":"Test Product","price":10.0},{"id":"e44db21f-578d-4ca7-8c16-fd12c2ea44db","name":"Test Product","price":10.0},{"id":"f87f0a45-fda0-4de8-94bc-21ee5d36966a","name":"Test Product","price":10.0},{"id":"fe6d2450-a194-42bc-a4f0-6c4064a4632d","name":"Test Product","price":10.0}]
+[
+    {
+        "id": "6b204bf6-7c40-4bae-a01d-2ef288b513a5",
+        "name": "Test Product",
+        "price": 10.0
+    },
+    {
+        "id": "ba590845-adce-42aa-8ad4-8ba8a57fbc44",
+        "name": "Test Product",
+        "price": 10.0
+    },
+    {
+        "id": "e44db21f-578d-4ca7-8c16-fd12c2ea44db",
+        "name": "Test Product",
+        "price": 10.0
+    },
+    {
+        "id": "f87f0a45-fda0-4de8-94bc-21ee5d36966a",
+        "name": "Test Product",
+        "price": 10.0
+    },
+    {
+        "id": "fe6d2450-a194-42bc-a4f0-6c4064a4632d",
+        "name": "Test Product",
+        "price": 10.0
+    }
+]

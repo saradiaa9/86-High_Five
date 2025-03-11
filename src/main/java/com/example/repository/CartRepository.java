@@ -6,38 +6,50 @@ import com.example.model.Cart;
 import com.example.model.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
 @SuppressWarnings("rawtypes")
 public class CartRepository extends MainRepository<Cart> {
 
-    public CartRepository() {}
-    
+    public CartRepository() {
+    }
+
     public Cart addCart(Cart cart) {
         save(cart);
         return cart;
     }
-    
+
     public ArrayList<Cart> getCarts() {
         return findAll();
     }
-    
+
     public Cart getCartById(UUID cartId) {
-      
+
         return findAll().stream()
                 .filter(cart -> cart.getId().equals(cartId))
                 .findFirst()
                 .orElse(null);
     }
-    
+
     public Cart getCartByUserId(UUID userId) {
-        return findAll().stream()
+        List<Cart> allCarts = findAll();
+
+        Cart userCart = allCarts.stream()
                 .filter(cart -> cart.getUserId().equals(userId))
                 .findFirst()
                 .orElse(null);
+
+        if (userCart == null) {
+            userCart = new Cart(UUID.randomUUID(), userId, new ArrayList<>());
+            allCarts.add(userCart);
+            overrideData((ArrayList<Cart>) allCarts);
+        }
+
+        return userCart;
     }
-    
+
     public void addProductToCart(UUID cartId, Product product) {
         Cart cart = getCartById(cartId);
         if (cart != null) {
@@ -45,7 +57,7 @@ public class CartRepository extends MainRepository<Cart> {
             save(cart);
         }
     }
-    
+
     public void deleteProductFromCart(UUID cartId, Product product) {
         Cart cart = getCartById(cartId);
         if (cart != null) {
@@ -53,7 +65,7 @@ public class CartRepository extends MainRepository<Cart> {
             save(cart);
         }
     }
-    
+
     public void deleteCartById(UUID cartId) {
         ArrayList<Cart> carts = findAll();
         carts.removeIf(cart -> cart.getId().equals(cartId));
@@ -70,4 +82,3 @@ public class CartRepository extends MainRepository<Cart> {
         return Cart[].class;
     }
 }
-

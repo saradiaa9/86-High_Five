@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,19 +46,40 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public User getUserById(@PathVariable UUID userId) {
-        return userService.getUserById(userId);
+    public ResponseEntity<User> getUserById(@PathVariable UUID userId) {
+        User user = userService.getUserById(userId);
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // ✅ Returns 404
+        }
+
+        return ResponseEntity.ok(user); // ✅ Returns 200 OK if user exists
     }
 
     @GetMapping("/{userId}/orders")
-    public List<Order> getOrdersByUserId(@PathVariable UUID userId) {
-        return userService.getOrdersByUserId(userId);
+    public ResponseEntity<List<Order>> getOrdersByUserId(@PathVariable UUID userId) {
+        List<Order> orders = userService.getOrdersByUserId(userId);
+
+        if (orders == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // ✅ Returns 404
+        }
+
+        return ResponseEntity.ok(orders); // ✅ Returns 200 OK if orders exist
     }
 
     @PostMapping("/{userId}/checkout")
-    public String addOrderToUser(@PathVariable UUID userId) {
-        userService.addOrderToUser(userId);
-        return "Order added successfully";
+    public ResponseEntity<String> addOrderToUser(@PathVariable UUID userId) {
+        User user = userService.getUserById(userId);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.valueOf(400)).body("User not found");
+        }
+
+        try {
+            userService.addOrderToUser(userId);
+            return ResponseEntity.ok("Order added successfully");
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()); // ✅ Properly handles empty cart
+        }
     }
 
     @PostMapping("/{userId}/removeOrder")

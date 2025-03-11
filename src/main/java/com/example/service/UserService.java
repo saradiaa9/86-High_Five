@@ -48,7 +48,7 @@ public class UserService extends MainService<User> {
     public void addOrderToUser(UUID userId) {
         Cart userCart = cartRepository.getCartByUserId(userId);
         if (userCart == null || userCart.getProducts().isEmpty()) {
-            throw new IllegalStateException("Cart is empty or does not exist.");
+            userCart = new Cart(UUID.randomUUID(), userId, new ArrayList<>());
         }
 
         double totalPrice = userCart.getProducts().stream().mapToDouble(p -> p.getPrice()).sum();
